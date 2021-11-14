@@ -20,14 +20,18 @@
 
 | Column                              | Type       | Options                        |
 |-------------------------------------|------------|--------------------------------|
-| image                               | string     | null: false                    |
 | product_name                        | string     | null: false                    |
 | product_description                 | text       | null: false                    |
 | price                               | string     | null: false                    |
+| shipping_charges                    | string     | null: false                    |
+| product_condition                   | text       | null: false                    |
+| shipping_area                       | text       | null: false                    |
+| days_to_ship                        | string     | null: false                    |
+| category                            | text       | null: false                    |
 | user                                | references | null: false, foreign_key: true |
 
 ### Association
-
+- belongs_to :user
 - belongs_to :purchases
 
 ## purchases table
@@ -42,13 +46,9 @@
 | building_name                       | string     | true                           |
 | phone_number                        | string     | null: false                    |
 | prefecture                          | references | null: false, foreign_key: true |
-| prefecture                          | references | null: false, foreign_key: true |
 
 
 ### Association
-
-- belongs_to :user
-- belongs_to :item
 - has_one :purchase_record
 
 
@@ -56,7 +56,6 @@
 
 | Column                              | Type       | Options                        |
 |-------------------------------------|------------|--------------------------------|
-| name                                | references | null: false, foreign_key: true |
 | user                                | references | null: false, foreign_key: true |
 
 
