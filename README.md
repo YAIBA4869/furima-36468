@@ -22,7 +22,7 @@
 |-------------------------------------|------------|--------------------------------|
 | product_name                        | string     | null: false                    |
 | product_description                 | text       | null: false                    |
-| price                               | string     | null: false                    |
+| price                               | integer    | null: false                    |
 | shipping_charges_id                 | integer    | null: false                    |
 | product_condition_id                | integer    | null: false                    |
 | shipping_area_id                    | integer    | null: false                    |
@@ -32,7 +32,7 @@
 
 ### Association
 - belongs_to :user
-- belongs_to :purchases
+- belongs_to :purchase_record
 
 ## purchases table
 
@@ -45,7 +45,7 @@
 | house_number                        | string     | null: false                    |
 | building_name                       | string     |                            |
 | phone_number                        | string     | null: false                    |
-| prefecture                          | references | null: false, foreign_key: true |
+| item                                | references | null: false, foreign_key: true |
 
 
 ### Association
@@ -61,7 +61,6 @@
 
 
 ### Association
-
 - belongs_to :user
 - belongs_to :item
 - has_one :purchase_record
