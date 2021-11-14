@@ -5,30 +5,30 @@
 | nickname           | string              | null: false               |
 | email              | string              | null: false, unique: true |
 | encrypted_password | string              | null: false               |
-| name_reading       | string              | null: false               |
-| birth_day          | string              | null: false               |
+| family_name        | string              | null: false               |
+| first_name         | string              | null: false               |
+| family_name_kana   | string              | null: false               |
+| first_name_kana    | string              | null: false               |
+| birth_day          | date                | null: false               |
 
 ### Association
 
 * has_many :items
-* belongs_to :purchases
+* has_many :purchases
 
 ## items table
 
 | Column                              | Type       | Options                        |
 |-------------------------------------|------------|--------------------------------|
-| product name                        | string     | null: false                    |
-| product description                 | text       | null: false                    |
-| category                            | text       | null: false                    |
-| shipping charges                    | string     | null: false                    |
-| product condition                   | text    | null: false                    |
-| shipping area                       | text     | null: false                    |
-| days to ship                        | string     | null: false                    |
+| image                               | string     | null: false                    |
+| product_name                        | string     | null: false                    |
+| product_description                 | text       | null: false                    |
+| price                               | string     | null: false                    |
 | user                                | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :user
+- belongs_to :purchases
 
 ## purchases table
 
@@ -36,16 +36,32 @@
 |-------------------------------------|------------|--------------------------------|
 | name                                | string     | null: false                    |
 | postal_code                         | string     | null: false                    |
-| prefecture                          | string     | null: false                    |
 | city                                | string     | null: false                    |
 | prefecture                          | string     | null: false                    |
 | house_number                        | string     | null: false                    |
-| building_name                       | string     | null: false                    |
+| building_name                       | string     | true                           |
 | phone_number                        | string     | null: false                    |
-| item                                | references | null: false, foreign_key: true |
-| user                                | references | null: false, foreign_key: true |
+| prefecture                          | references | null: false, foreign_key: true |
+| prefecture                          | references | null: false, foreign_key: true |
+
 
 ### Association
 
 - belongs_to :user
 - belongs_to :item
+- has_one :purchase_record
+
+
+## purchase_record table
+
+| Column                              | Type       | Options                        |
+|-------------------------------------|------------|--------------------------------|
+| name                                | references | null: false, foreign_key: true |
+| user                                | references | null: false, foreign_key: true |
+
+
+### Association
+
+- belongs_to :user
+- belongs_to :item
+- belongs_to :purchase
