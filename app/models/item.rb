@@ -1,12 +1,16 @@
-# class Item < ApplicationRecord
-#   extend ActiveHash::Associations::ActiveRecordExtensions
-#   belongs_to :genre
+class Item < ApplicationRecord
+  # belongs_to :user
+  # belongs_to :purchase_record
+  
 
-#   #空の投稿を保存できないようにする
-#   validates :title, :text, presence: true
-
-#   #ジャンルの選択が「--」の時は保存できないようにする
-#   validates :genre_id, numericality: { other_than: 1 , message: "can't be blank"}
-# end
-
-# end
+  validates :product_name, presence: true
+  validates :product_description, presence: true
+  validates :price, presence: true
+  validates :shipping_charges_id, presence: true
+  validates :product_condition_id, presence: true
+  validates :shipping_area_id, presence: true
+  validates :days_to_ship_id, presence: true
+  validates :prefecture_id, presence: true
+  validates :category_id, presence: true
+  validates :user, presence: true
+end
