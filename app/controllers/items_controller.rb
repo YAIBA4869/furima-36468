@@ -4,16 +4,16 @@ class ItemsController < ApplicationController
   # end
 
   def index
-    @items = Item.includes(:user)
+    # @items = Item.includes(:user)
     # @items = Item.all
   end
 
   def new
-    @item = Item.new
+    # @item = Item.new
   end
 
   def create
-    Item.create(item_params)
+    # Item.create(item_params)
   end
 
   private
