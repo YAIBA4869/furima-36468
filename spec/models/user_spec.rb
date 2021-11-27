@@ -24,57 +24,62 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Email is invalid")
       end
-      it "パスワードが6文字未満では登録できない" do
-        @user.password = '12345'
-        @user.password_confirmation = '12345'
-        @user.valid?
-        expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
-      end
+      # it "パスワードが6文字未満では登録できない" do
+      #   @user.password = '12345'
+      #   @user.password_confirmation = '12345'
+      #   @user.valid?
+        
+      #   expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
+      # end
       it "英字のみのパスワードでは登録できない" do
         @user.password = 'abcdef'
+        @user.password_confirmation = 'abcdef'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+        expect(@user.errors.full_messages).to include("Password Please set including both letters and numbers")
+      end
+      it "passwordが半角英数字混合でなければ登録できない" do
+        @user.password = 'asdzxc'
+        @user.password_confirmation = 'asdzxc'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password Please set including both letters and numbers')
       end
       it 'パスワードが数字のみでは登録できない' do
         @user.password = '123456'
+        @user.password_confirmation = '123456'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
-      end
-      it 'パスワードが数字のみでは登録できない' do
-        @user.password = '123456'
-        @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+        expect(@user.errors.full_messages).to include("Password Please set including both letters and numbers")
       end
       it '全角文字を含むパスワードでは登録できない' do
-        @user.password = '12D456'
+        @user.password = '12３456'
+        @user.password_confirmation = '12３456'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password Please set including both letters and numbers")
+      end
+      it 'パスワードとパスワード（確認用）が不一致だと登録できない' do
+        @user.password = '123iop'
+        @user.password_confirmation = '123qwe'
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
-      it 'パスワードとパスワード（確認用）が不一致だと登録できない' do
-        @user.password = ''
-        @user.password_confirmation = ''
-        @user.valid?
-        expect(@user.errors.full_messages).to include("Password can't be blank")
-      end
       it '姓（全角）に半角文字が含まれていると登録できない' do
-        @user.family_name = ""
+        @user.family_name = "kana"
         @user.valid?
-        expect(@user.errors.full_messages).to include("Family name can't be blank")
+        expect(@user.errors.full_messages).to include("Family name Please use double-byte characters")
       end
       it '名（全角）に半角文字が含まれていると登録できない' do
-        @user.first_name = ""
+        @user.first_name = "kana"
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name can't be blank")
+        expect(@user.errors.full_messages).to include("First name Please use double-byte characters")
       end
       it '姓（カナ）にカタカナ以外の文字（平仮名・漢字・英数字・記号）が含まれていると登録できない' do
-        @user.family_name_kana = ""
+        @user.family_name_kana = "かな"
         @user.valid?
-        expect(@user.errors.full_messages).to include("Family name kana can't be blank")
+        expect(@user.errors.full_messages).to include("Family name kana Please use full-width katakana")
       end
       it '名（カナ）にカタカナ以外の文字（平仮名・漢字・英数字・記号）が含まれていると登録できない' do
-        @user.first_name_kana = ""
+        @user.first_name_kana = "かな"
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name kana can't be blank")
+        expect(@user.errors.full_messages).to include("First name kana Please use full-width katakana")
       end
       
     end

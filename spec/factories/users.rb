@@ -4,10 +4,10 @@ FactoryBot.define do
     email                 {'test@test.com'}
     password              {'12d456'}
     password_confirmation {password}
-    family_name           {'TEST'}
-    first_name            {'TEST'}
-    family_name_kana      {'カナ'} 
-    first_name_kana      {'カナ'} 
+    family_name           {'山田'}
+    first_name            {'太郎'}
+    family_name_kana      {'ヤマダ'} 
+    first_name_kana      {'タロウ'} 
     birth_day             {'2000-01-01'}
   end
 end
