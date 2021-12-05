@@ -53,7 +53,6 @@ require 'rails_helper'
           end
           it 'priceが空だと出品できない' do
             @item.price = nil
-            # binding.pry
             @item.valid?
             expect(@item.errors.full_messages).to include("Price can't be blank")
           end
@@ -62,10 +61,46 @@ require 'rails_helper'
             @item.valid?
             expect(@item.errors.full_messages).to include("Price Input half-width characters")
           end
-          it 'priceが設定範囲以外だと出品できない' do
-            @item.price = "100000000"
+          it '価格が300円未満では出品できない' do
+            @item.price = "299"
             @item.valid?
             expect(@item.errors.full_messages).to include("Price out of setting range")
+          end
+          it '価格が9_999_999円を超えると出品できない' do
+            @item.price = "10000000"
+            @item.valid?
+            expect(@item.errors.full_messages).to include("Price out of setting range")
+          end
+          it 'カテゴリーに「---」が選択されている場合は出品できない' do
+            @item.category_id = "---"
+            @item.valid?
+            expect(@item.errors.full_messages).to include("Category can't be blank")
+          end
+          it '商品の状態に「---」が選択されている場合は出品できない' do
+            @item.product_condition_id = "---"
+            @item.valid?
+            expect(@item.errors.full_messages).to include("Product condition can't be blank")
+          end
+          it '配送料の負担に「---」が選択されている場合は出品できない' do
+            @item.shipping_charges_id = "---"
+            @item.valid?
+            expect(@item.errors.full_messages).to include("Shipping charges can't be blank")
+          end
+          it '商品の状態に「---」が選択されている場合は出品できない' do
+            @item.prefecture_id = "---"
+            @item.valid?
+            expect(@item.errors.full_messages).to include("Prefecture can't be blank")
+          end
+          it '商品の状態に「---」が選択されている場合は出品できない' do
+            @item.days_to_ship_id = "---"
+            @item.valid?
+            expect(@item.errors.full_messages).to include("Days to ship can't be blank")
+          end
+          it 'userが紐付いていないと出品できない' do
+            @item.user = nil
+            # binding.pry
+            @item.valid?
+            expect(@item.errors.full_messages).to include("User must exist")
           end
       end
     end

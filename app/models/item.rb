@@ -4,9 +4,13 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :product_condition
+  belongs_to :category
+  belongs_to :shipping_charges
   
   with_options presence: true do
     validates :image
+    validates :price
   end
 
   validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "out of setting range"}
@@ -21,5 +25,5 @@ class Item < ApplicationRecord
   validates :prefecture_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :days_to_ship_id, numericality: { other_than: 1 , message: "can't be blank"}
 
-  validates :price, presence: true
+  
 end
