@@ -4,9 +4,6 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :product_condition
-  belongs_to :category
-  belongs_to :shipping_charges
   
   with_options presence: true do
     validates :image
@@ -17,20 +14,12 @@ class Item < ApplicationRecord
 
   validates :product_name, presence: true
   validates :product_description, presence: true
-  # validates :category_id, presence: true
-  # validates :product_condition_id, presence: true
-  # validates :shipping_area_id, presence: true
-  # validates :prefecture_id, presence: true
-  # validates :days_to_ship_id, presence: true
-  validates :price, presence: true
-  # validates :shipping_charges_id, presence: true
-  validates :user, presence: true
   
-
-  # validates :text, presence: true
   validates :category_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :product_condition_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :shipping_charges_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :prefecture_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :days_to_ship_id, numericality: { other_than: 1 , message: "can't be blank"}
+
+  validates :price, presence: true
 end
