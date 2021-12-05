@@ -11,13 +11,12 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :image
     validates :price
+    validates :product_name
+    validates :product_description
   end
 
   validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "out of setting range"}
   validates :price, numericality: { only_integer: true, message: "Input half-width characters" }
-
-  validates :product_name, presence: true
-  validates :product_description, presence: true
   
   validates :category_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :product_condition_id, numericality: { other_than: 1 , message: "can't be blank"}
