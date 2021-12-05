@@ -25,7 +25,6 @@
 | price                               | integer    | null: false                    |
 | shipping_charges_id                 | integer    | null: false                    |
 | product_condition_id                | integer    | null: false                    |
-| shipping_area_id                    | integer    | null: false                    |
 | days_to_ship_id                     | integer    | null: false                    |
 | prefecture_id                       | integer    | null: false                    |
 | category_id                         | integer    | null: false                    |

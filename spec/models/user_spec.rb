@@ -126,7 +126,6 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("First name kana Please use full-width katakana")
       end
-      
     end
   end
 end
