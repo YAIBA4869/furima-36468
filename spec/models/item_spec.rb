@@ -98,7 +98,6 @@ require 'rails_helper'
           end
           it 'userが紐付いていないと出品できない' do
             @item.user = nil
-            # binding.pry
             @item.valid?
             expect(@item.errors.full_messages).to include("User must exist")
           end
