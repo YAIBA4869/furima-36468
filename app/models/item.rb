@@ -1,12 +1,14 @@
 class Item < ApplicationRecord
   belongs_to :user
-  # belongs_to :purchase_record
+  # belongs_to :purchase
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :product_condition
   belongs_to :category
-  belongs_to :shipping_charges
+  belongs_to :prefecture
+  belongs_to :shopping_charges
+  belongs_to :days_to_ship
   
   with_options presence: true do
     validates :image
@@ -20,7 +22,7 @@ class Item < ApplicationRecord
   
   validates :category_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :product_condition_id, numericality: { other_than: 1 , message: "can't be blank"}
-  validates :shipping_charges_id, numericality: { other_than: 1 , message: "can't be blank"}
+  validates :shopping_charges_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :prefecture_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :days_to_ship_id, numericality: { other_than: 1 , message: "can't be blank"}
 
