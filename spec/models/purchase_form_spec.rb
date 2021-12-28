@@ -8,8 +8,17 @@ RSpec.describe PurchaseForm, type: :model do
     sleep 0.1
   end
 
-  describe '購入情報' do
+  describe '購入できる時' do
     context '全ての項目が入力されていれば購入できる' do
+      it '全ての項目があれば購入できる' do
+        expect(@purchase_form).to be_valid
+      end
+
+      it '建物名が空でも購入できる' do
+        @purchase_form.building = nil
+        expect(@purchase_form).to be_valid
+      end
+
       it 'postal_code、prefecture_id、city、addresses、phone_number' do
         expect(@purchase_form).to be_valid
       end
@@ -22,7 +31,6 @@ RSpec.describe PurchaseForm, type: :model do
       end
       it 'itemが紐付いていなければ購入できない' do
         @purchase_form.item_id = nil
-        # binding.pry
         @purchase_form.valid?
         expect(@purchase_form.errors.full_messages).to include("Item can't be blank")
       end
