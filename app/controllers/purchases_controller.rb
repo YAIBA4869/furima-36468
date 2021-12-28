@@ -8,7 +8,6 @@ class PurchasesController < ApplicationController
   end
 
   def new
-    @purchases_form = PurchasesFrom.new
   end
   
   def create
