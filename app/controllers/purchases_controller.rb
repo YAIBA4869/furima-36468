@@ -6,9 +6,6 @@ class PurchasesController < ApplicationController
   def index
     @purchase_form = PurchaseForm.new
   end
-
-  def new
-  end
   
   def create
     @purchase_form = PurchaseForm.new(purchase_params)
